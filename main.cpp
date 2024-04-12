@@ -8,10 +8,11 @@ using namespace chtml;
 
 int main() {
 
-    testBattleParse();
+    //testBattleParse();
     //testParseHTMLScript();
     //testParseHTML1();
     //testParseHTML5();
+    testQuery1();
 
     return 0;
 }

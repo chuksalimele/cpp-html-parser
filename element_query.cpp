@@ -9,11 +9,11 @@ namespace chtml{
 
         for(HTMLNode* node :  parent.children){
             
-            std::cout << node->tag.name << std::endl;
+            //std::cout << node->tag.name << std::endl;
 
             for(Attribute attr : node->attributes){
                 if(attr.name == "id" && attr.value == element_id){
-                    std::cout << node->tag.name  << " found id : " << attr.name << " value = " << attr.value << std::endl;
+                    //std::cout << node->tag.name  << " found id : " << attr.name << " value = " << attr.value << std::endl;
                     return *node;
                 }
             }

@@ -34,14 +34,34 @@ void testQuery1() {
 
     HTMLNode el = findElementById(root, "myid3");  
     
+    std::cout << el.innerHTML << std::endl;
+
     std::vector<HTMLNode> els = findAllElementsByClassName(root, "div-cls");
+
+    std::cout << "findAllElementsByClassName" << std::endl;
+    for(HTMLNode n : els){
+        std::cout << "----------" << std::endl;
+        std::cout << n.innerHTML << std::endl;
+        std::cout << "----------" << std::endl;
+    }
 
     HTMLNode elc = findFirstElementByClassName(root, "div-cls");
 
+    std::cout << elc.innerHTML << std::endl;
+
     HTMLNode ele = findElementByElementId(root, "myid3", "myid4");
+
+    std::cout << ele.innerHTML << std::endl;
 
     HTMLNode elt = findFirstElementByTag(root, "def");
 
-    std::vector<HTMLNode> elts = findAllElementsByTag(root, "Div");
+    std::cout << elt.innerHTML << std::endl;
 
+    std::vector<HTMLNode> elts = findAllElementsByTag(root, "Div");
+    std::cout << "findAllElementsByTag" << std::endl;
+    for(HTMLNode n : elts){
+        std::cout << "----------" << std::endl;
+        std::cout << n.innerHTML << std::endl;
+        std::cout << "----------" << std::endl;
+    }
 }
