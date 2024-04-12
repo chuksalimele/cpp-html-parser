@@ -58,7 +58,7 @@ namespace chtml{
 
     }
 
-    void extractTag(Tag& tag, const std::string_view html, const std::string_view parent_tag_name, int tag_name_index, int tag_name_len, int tag_inner_raw_len){
+    void extractTag(Tag& tag, const std::string_view html, const std::string_view parent_tag_name, const int tag_name_index, const int tag_name_len, const int tag_inner_raw_len){
         
         tag.name = html.substr(tag_name_index, tag_name_len);
         tag.rawInner = html.substr(tag_name_index , tag_inner_raw_len);
@@ -71,7 +71,7 @@ namespace chtml{
                 
     }
 
-    std::vector<Attribute> createAttributes(std::string_view inner_raw){
+    std::vector<Attribute> createAttributes(const std::string_view inner_raw){
 
         int len = inner_raw.size();
         int single_quote_count = 0;

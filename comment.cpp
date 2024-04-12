@@ -3,7 +3,7 @@
 
 namespace chtml{
     
-    int getCommentEndIndex(const std::string_view html , int i){
+    int getCommentEndIndex(const std::string_view html , const int i){
 
         int len = html.size();
         if( i + 3 <  len){ // check for sequence starting with <!--

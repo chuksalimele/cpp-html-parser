@@ -4,7 +4,7 @@
 
 namespace chtml{
                         
-    void nextChildNode (HTMLNode* node, int offset, const std::string_view html, const std::string_view parent_tag_name, int& estimated_children_count){
+    void nextChildNode(HTMLNode* node, const int offset, const std::string_view html, const std::string_view parent_tag_name, int& estimated_children_count){
         int len = html.size();
         
         int tag_name_index = -1; 
@@ -43,6 +43,8 @@ namespace chtml{
         Tag current_tag; // needed only when during analysis we need to know the focus tag down the line
         bool is_comment = false;
         int first_none_whitespace_index = -1;
+        int last_none_whitespace_index = -1;
+        int prev_last_none_whitespace_index = -1;
 
         int estimated_direct_child_tag_count = 0;
         int container_open = 0;
@@ -79,6 +81,11 @@ namespace chtml{
                 if(first_none_whitespace_index == -1){
                     // we need this to filter text nodes with only whitespaces
                     first_none_whitespace_index = i; 
+                }
+
+                if(first_none_whitespace_index != -1 && tag_begin_index == -1){
+                    prev_last_none_whitespace_index = last_none_whitespace_index; 
+                    last_none_whitespace_index = i; 
                 }            
             }
 
@@ -123,6 +130,9 @@ namespace chtml{
                 
                 if(tag_begin_index == -1){
                     tag_begin_index = open_angle_index; // set it only once because we want the very begining
+                    
+                    //fallback to prev_last_none_whitespace_index
+                    last_none_whitespace_index = prev_last_none_whitespace_index;
                 }   
                 
                 //i = tag_name_index; @Deprecated - removed so we can know the tag name length
@@ -298,9 +308,18 @@ namespace chtml{
 
         if(first_none_whitespace_index <= text_end_index && text_end_index != -1 ){//text node
             node->leafNode = true;
-            node->parentStartIndex = text_begin_index;               
-            node->parentEndIndex = text_end_index;
-            node->innerHTML = html.substr(text_begin_index, text_end_index - text_begin_index + 1);
+            node->parentStartIndex = text_begin_index;//wrong
+            node->parentEndIndex = text_end_index;//wrong
+
+            if(first_none_whitespace_index == -1){//meaning there is no text
+                first_none_whitespace_index = text_begin_index;
+                last_none_whitespace_index = text_begin_index -1; //empty
+            }    
+
+            //wrong
+            //node->innerHTML = html.substr(text_begin_index, text_end_index - text_begin_index + 1); 
+            //right
+            node->innerHTML = html.substr(first_none_whitespace_index, last_none_whitespace_index - first_none_whitespace_index + 1); //right
             //we know most comments will only eventually end up in two type of place
             //either at the text node or at the tag rawInnner g.g <inpt <!-- comment --> id ="myid">
 
@@ -312,7 +331,7 @@ namespace chtml{
         }else if (first_tag.name.size() != 0 ){//tag node        
             node->tag = first_tag;
             
-           // parserExecutor.enqueue([node] {
+            //parserExecutor.enqueue([node] {
                 node->attributes = createAttributes(node->tag.rawInner);
             //});
 

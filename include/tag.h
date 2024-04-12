@@ -23,7 +23,7 @@ namespace chtml{
 
     void scriptClosingTagEnd(const std::string_view html, int& cursor, int& opening_angle_index, int& closing_angle_index, bool& found_script_closing_tag);
 
-    void extractTag(Tag& tag, const std::string_view html, const std::string_view parent_tag_name, int tag_name_index, int tag_name_len, int tag_inner_raw_len);
+    void extractTag(Tag& tag, const std::string_view html, const std::string_view parent_tag_name, const int tag_name_index, const int tag_name_len, const int tag_inner_raw_len);
 
     std::vector<Attribute> createAttributes(const std::string_view inner_raw);
 

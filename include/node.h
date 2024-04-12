@@ -23,7 +23,7 @@ namespace chtml{
     };
     
 
-    void nextChildNode (HTMLNode* node, int offset, const std::string_view html, const std::string_view parent_tag_name, int& estimated_children_count);
+    void nextChildNode (HTMLNode* node, const int offset, const std::string_view html, const std::string_view parent_tag_name, int& estimated_children_count);
 
 }
 

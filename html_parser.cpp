@@ -19,7 +19,7 @@ namespace chtml{
                 HTMLNode* child_node = new HTMLNode;
 
                 nextChildNode(child_node, index, node->innerHTML, node->tag.name, estimated_children_count);      
-                
+                                
                 //std::cout << "estimated_children_count = " << estimated_children_count <<std::endl;
                 
                 child_node->children.reserve(estimated_children_count);
@@ -63,7 +63,6 @@ namespace chtml{
         
         //parserExecutor.start();
 
-        //parseHTML(node);
 
         return *node;
     }
@@ -87,10 +86,16 @@ namespace chtml{
             std::runtime_error("Invalid node - expected root node");
         }*/
 
-        recursivelyDeallocateChildren(root);
-        
-        delete root; // Finally delete the root node
-        root = nullptr;  // Set to nullptr after deletion
+        try{    
+            
+            recursivelyDeallocateChildren(root);
+
+            //delete root; // Finally delete the root node
+            //root = nullptr;  // Set to nullptr after deletion
+
+        }catch(std::exception& e){
+            std::cerr << "Exception : " << e.what() << std::endl;
+        } 
     }
 
 }

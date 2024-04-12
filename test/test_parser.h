@@ -8,7 +8,8 @@ using namespace chtml;
 
 void testParseHTML1() {
     
-    std::string html = "<a id = 'my'><input/><b> B </b><input/><c> C </c><d> D </d></a>";
+    //std::string html = "<a id = 'my'><input/><b> B </b><input/><c> C </c><d> D </d></a>";
+    std::string html = "<a>  you  <b>  me   </b>   them   </a>";
     
     HTMLNode root = parseHTML(html);    
 

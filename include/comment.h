@@ -7,7 +7,7 @@
 
 namespace chtml{
     
-    int getCommentEndIndex(const std::string_view html , int i);
+    int getCommentEndIndex(const std::string_view html , const int i);
 
     std::string removeTextNodeComments(const std::string_view html);
 
