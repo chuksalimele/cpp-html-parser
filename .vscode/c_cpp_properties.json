@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        
+        {
+            "name": "Compiler",
+            "customConfigurationVariables": {
+                "chuksCppCompiler":"C:\\msys64\\mingw32\\bin\\g++.exe"
+            }
+        }
+    ],
+    "version": 4
+}
